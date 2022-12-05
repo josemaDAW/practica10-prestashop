@@ -22,7 +22,7 @@ apt install mysql-server -y
 apt install php libapache2-mod-php php-mysql -y
 
 #copiar el archivo de configuracion de apache
-cp ../config/000-default.conf /etc/apache2/sites-available/000-default.conf
+cp ../conf/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #Reiniciamos apache
 systemctl restart apache2
