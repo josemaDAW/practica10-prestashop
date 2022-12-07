@@ -6,7 +6,10 @@ set -x
 # Definimos la variables de configuración
 source variables.sh
 
-# Descargamos el código fuente de presta
+# Eliminamos si hubiese alguna instalación anterior
+rm -rf /tmp/presta.zip
+
+# Descargamos el código fuente de wordpress
 wget https://github.com/PrestaShop/PrestaShop/releases/download/8.0.0/prestashop_8.0.0.zip --output-document /tmp/presta.zip
 
 # Acttualizamos los repositorios
@@ -15,21 +18,39 @@ apt update
 #Instalamos el descompresor de paquetes zip si no está instalado
 apt install unzip -y
 
-# Eliminamos si hubiese alguna instalación anterior
-#rm -rf /var/www/html/wordpress
-# rm -rf /tmp/presta.zip
-rm -rf /tmp/prestashop.zip
-rm -rf /tmp/Install_PrestaShop.html
-rm -rf /tmp/index.php 
+#Borramos presta (Esto es para cuando queramos lanzar el scripts todas las veces que quereamos y no se quede parado)
+rm -rf /tmp/presta
 
-# Descomprimimos el archivo .zip con el código fuente
-#unzip /tmp/wordpress.zip -d /var/www/html
+#Descomprimimos el archivo .zip con el código fuente
 unzip /tmp/presta.zip -d /tmp/presta
 
+#Borramos prestashop
+rm -rf /tmp/prestashop
+
+#Descomprimimos prestashop.zip
+unzip /tmp/presta/prestashop.zip -d /tmp/prestashop
+
+rm -rf /tmp/presta
+rm -rf /tmp/presta.zip
 
 #Movemos el código fuente al directorio de apache
-mv /tmp/presta/* /var/www/html
+mv /tmp/prestashop/* /var/www/html
 
-#borramos el prestashop.zip
-rm -rf /tmp/presta.zip
-rm -rf /tmp/presta
+#Borramos la carpeta de prestashop del temporal
+rm -rf /tmp/prestashop
+
+#instalamos los paquetes necesarios que nos solicita la instalación (Esto nos quita 2 errores de la instalación)
+apt-get install php-zip php-simplexml -y
+
+#añadimos las extensiones en el siguiente archivo /etc/php/8.1/apache2/php.ini si no funciona la instalacion de paquetes
+#sed -i "a/;ffi.preload=/extension=simplexml.so/" /etc/php/8.1/apache2/php.ini
+#sed -i "a/extension=simplexml.so/extension=zip.so/" /etc/php/8.1/apache2/php.ini
+
+#Para quitar el ultimo el error damos permisos a toda la carpeta html
+sudo chmod -R 777 /var/www/html/
+
+#reiniciamos apache2 para que se apliquen los cambios
+sudo systemctl restart apache2
+
+
+
