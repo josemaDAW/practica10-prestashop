@@ -64,7 +64,8 @@ sudo apt-get install php-mbstring -y
 #reiniciamos apache2 para que se apliquen los cambios
 sudo systemctl restart apache2
 
-php /var/www/html/install/index_cli.php --domain=$domain --db_server=$DB_HOST_PRIVATE_IP --db_name=$DB_NAME --db_user=$DB_USER --db_password=$DB_PASSWORD --prefix=myshop_ --email=tamm.jvdcm86@tijux.com --password=tamm.jvdcm86@tijux.com
+#con esta linea de comandos lo que conseguimos es automatizar la intalación de prestashop
+php /var/www/html/install/index_cli.php --domain=$domain --db_server=$DB_HOST_PRIVATE_IP --db_name=$DB_NAME --db_user=$DB_USER --db_password=$DB_PASSWORD --prefix=myshop_ --email=tamm.jvdcm86@tijux.com --password=tamm.jvdcm86@tijux.com --ssl=1
 
 
 
