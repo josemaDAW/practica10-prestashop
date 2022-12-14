@@ -9,6 +9,11 @@ Registra un nombre de dominio en NO-IP con un correo temporal (https://correotem
 
 una vez dentro del NO-IP configuramos la IP del frontend
 
+para comprobar los requisitos de nuestra maquina copiamos el contenido del phpinfo.php que se encuentra en un repositorio de github (https://raw.githubusercontent.com/PrestaShop/php-ps-info/master/phppsinfo.php) y añadimos en el contenido a un archivo del servidor y nos saldria algo tal que asi
+
+![image](https://user-images.githubusercontent.com/98399604/207587940-7cbcb90c-8fbb-4dde-b737-550ac1e9dce2.png)
+
+
 Nos vamos al Backend y desplegamos el script de backend.sh para dejarlo listo y una vez lo tengamos desplegado
 
 Y nos conectamos a la maquina del frontend y comenzamos la instalación de la fronted.sh y el despliegue de prestashop.
