@@ -42,10 +42,6 @@ rm -rf /tmp/prestashop
 #instalamos los paquetes necesarios que nos solicita la instalación (Esto nos quita 2 errores de la instalación)
 apt-get install php-zip php-simplexml -y
 
-#añadimos las extensiones en el siguiente archivo /etc/php/8.1/apache2/php.ini si no funciona la instalacion de paquetes
-#sed -i "a/;ffi.preload=/extension=simplexml.so/" /etc/php/8.1/apache2/php.ini
-#sed -i "a/extension=simplexml.so/extension=zip.so/" /etc/php/8.1/apache2/php.ini
-
 #Para quitar el ultimo el error damos permisos a toda la carpeta html
 sudo chmod -R 777 /var/www/html/
 
