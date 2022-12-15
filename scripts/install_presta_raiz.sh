@@ -57,11 +57,21 @@ sudo apt-get install php-intl -y
 #Para el ultimo error "mbstrings extension is activated"
 sudo apt-get install php-mbstring -y
 
+#Cambio el valor de post_max_size.
+
+sed -i "s/post_max_size = 8M/post_max_size = 16M/" /etc/php/8.1/apache2/php.ini
+
+#Cambio el valor de upload_max_filesize.
+
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 4M/" /etc/php/8.1/apache2/php.ini
+
 #reiniciamos apache2 para que se apliquen los cambios
 sudo systemctl restart apache2
 
 #con esta linea de comandos lo que conseguimos es automatizar la intalación de prestashop
-php /var/www/html/install/index_cli.php --domain=$domain --db_server=$DB_HOST_PRIVATE_IP --db_name=$DB_NAME --db_user=$DB_USER --db_password=$DB_PASSWORD --prefix=myshop_ --email=tamm.jvdcm86@tijux.com --password=tamm.jvdcm86@tijux.com --ssl=1
+php /var/www/html/install/index_cli.php \
+    --domain=$domain \
+    --db_server=$DB_HOST_PRIVATE_IP --db_name=$DB_NAME --db_user=$DB_USER \
+    --db_password=$DB_PASSWORD --prefix=myshop_ --email=tamm.jvdcm86@tijux.com --password=tamm.jvdcm86@tijux.com --ssl=1
 
-
-
+rm -rf /var/www/html/install
