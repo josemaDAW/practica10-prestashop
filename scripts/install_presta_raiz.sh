@@ -59,11 +59,15 @@ sudo apt-get install php-mbstring -y
 
 #Cambio el valor de post_max_size.
 
-sed -i "s/post_max_size = 8M/post_max_size = 16M/" /etc/php/8.1/apache2/php.ini
+sed -i "s/post_max_size = 8M/post_max_size = 128M/" /etc/php/8.1/apache2/php.ini
 
 #Cambio el valor de upload_max_filesize.
 
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 4M/" /etc/php/8.1/apache2/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 128M/" /etc/php/8.1/apache2/php.ini
+
+sed -i "s/memory_limit = 128M/memory_limit = 256M/" /etc/php/8.1/apache2/php.ini
+
+sed -i "s/;max_input_vars/max_input_vars = 5000/" /etc/php/8.1/apache2/php.ini
 
 #reiniciamos apache2 para que se apliquen los cambios
 sudo systemctl restart apache2
